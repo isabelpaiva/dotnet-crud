@@ -11,6 +11,8 @@ public static class EstudantesRotas
         var rotasEstudantes = app.MapGroup(prefix: "estudantes");
 
         rotasEstudantes.MapPost(pattern: "", handler: async (AddEstudantesRequest request, AppDbContext context) =>
+
+
         {
             var estudanteExiste = await context.Estudantes.AnyAsync(estudante => estudante.Nome == request.Nome);
 
@@ -25,6 +27,11 @@ public static class EstudantesRotas
             await context.SaveChangesAsync();
 
             return Results.Ok(novoEstudante);
+        });
+
+        rotasEstudantes.MapGet(pattern:"", handler: async  (AppDbContext context)=> {
+            var estudantes = await context.Estudantes.Where(estudante => estudante.Ativo).ToListAsync();
+            return estudantes;
         });
     }  
 }
