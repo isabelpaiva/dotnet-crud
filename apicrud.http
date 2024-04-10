@@ -1,0 +1,6 @@
+@apicrud_HostAddress = http://localhost:5108
+
+GET {{apicrud_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
